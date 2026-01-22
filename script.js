@@ -1,10 +1,10 @@
- const API_URL = 'http://localhost:5001/messages'; // 端口改成你 Flask 的端口
+const API_URL = 'https://message-board-5jhw.onrender.com/messages';
 
 async function submitMessage() {
   const username = document.getElementById('usernameInput').value.trim();
   const message = document.getElementById('messageInput').value.trim();
 
-  if (username === '' || message === '') return; // 防止空输入
+  if (username === '' || message === '') return;
 
   await fetch(API_URL, {
     method: 'POST',
@@ -15,15 +15,15 @@ async function submitMessage() {
   });
 
   document.getElementById('messageInput').value = '';
-  loadMessages(); // 提交后刷新留言列表
+  loadMessages();
 }
 
 async function loadMessages() {
-  const res = await fetch('http://localhost:5001/messages');
+  const res = await fetch(API_URL);
   const messages = await res.json();
 
   const list = document.getElementById('messageList');
-  list.innerHTML = ''; // 清空旧内容
+  list.innerHTML = '';
 
   messages.forEach(msg => {
     const li = document.createElement('li');
@@ -32,5 +32,4 @@ async function loadMessages() {
   });
 }
 
-// 页面加载时自动获取留言
 window.onload = loadMessages;
