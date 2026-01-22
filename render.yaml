@@ -1,0 +1,12 @@
+ services:
+  - type: web
+    name: message-board
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    rootDir: backend
+    envVars:
+      - key: WEB_CONCURRENCY
+        value: "1"
+      - key: PORT
+        value: "10000"
