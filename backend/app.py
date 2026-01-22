@@ -68,4 +68,5 @@ def post_message():
 # --- 程序入口 ---
 if __name__ == '__main__':
     init_db()
-    app.run(debug=True, port=5001)
+    port = int(os.environ.get('PORT', 5001))  # 从环境变量读取 PORT，默认是 5001（本地测试用）
+    app.run(host='0.0.0.0', port=port)
